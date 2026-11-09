@@ -119,10 +119,12 @@ def password_reset_request():
             send_email(user.email, 'Reset Your Password',
                        'auth/email/reset_password',
                        user=user, token=token)
-        flash('An email with instructions to reset your password has been '
-              'sent to you.')
-        flash('<p>To reset your password <a href="' + url_for('auth.password_reset', token=token, _external=True) + '">click here</a></p>')
-        return redirect(url_for('auth.login'))
+            flash('An email with instructions to reset your password has been '
+                  'sent to you.')
+            flash('<p>To reset your password <a href="' + url_for('auth.password_reset', token=token, _external=True) + '">click here</a></p>')
+            return redirect(url_for('auth.login'))
+        else:
+            flash('Email address not registered.')
     return render_template('auth/reset_password.html', form=form)
 
 
